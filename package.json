@@ -1,0 +1,16 @@
+{
+  "name": "image-processing-api",
+  "version": "1.0.0",
+  "description": "Image processing api using node, express & typescript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "typescript"
+  ],
+  "author": "kevin siende",
+  "license": "ISC"
+}
