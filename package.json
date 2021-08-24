@@ -4,7 +4,10 @@
   "description": "Image processing api using node, express & typescript",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon src/index.ts",
+    "build": "npx tsc",
+    "jasmine": "jasmine",
+    "test": "npm run build && npm run jasmine"
   },
   "keywords": [
     "node",
