@@ -1,11 +1,14 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "jasmine": true
     },
     "extends": [
         "airbnb-base",
-        "prettier"
+        "prettier",
+        "plugin:import/typescript",
+        "plugin:jasmine/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -13,8 +16,16 @@
         "sourceType": "module"
     },
     "plugins": [
+        "jasmine",
         "@typescript-eslint"
     ],
     "rules": {
+    },
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        }
+      }
     }
 }
