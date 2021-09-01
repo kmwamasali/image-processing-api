@@ -4,7 +4,7 @@
   "description": "Image processing api using node, express & typescript",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ts-node src/index.ts",
+    "start": "nodemon src/index.ts",
     "build": "npx tsc",
     "lint:fix": "eslint --fix",
     "jasmine": "jasmine",
@@ -22,12 +22,14 @@
     "jasmine": "^3.9.0",
     "jasmine-spec-reporter": "^7.0.0",
     "nodemon": "^2.0.12",
+    "sharp": "^0.29.0",
     "supertest": "^6.1.6"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/jasmine": "^3.8.2",
     "@types/node": "^16.7.1",
+    "@types/sharp": "^0.28.5",
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^4.29.3",
     "@typescript-eslint/parser": "^4.30.0",
