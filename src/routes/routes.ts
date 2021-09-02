@@ -11,15 +11,24 @@ const getImageFile = async (req: any, res: express.Response, next: express.NextF
   const height = parseInt(req.query.height, 10);
 
   const fullImageFilepath = path.join(__dirname, '../images/full', `${filename}.jpg`);
-  const thumbImageFilepath = path.join(__dirname, '../images/thumb', `${filename}.jpg`)
+  const thumbImageFilepath = path.join(__dirname, '../images/thumb', `${filename}.jpg`);
+
+  fs.access(thumbImageFilepath, fs.constants.F_OK, (err) => {
+    if (err) {
+      return res.end('Image does not exist');
+    }
+    return next();
+  });
 
   const imageBuffer = await sharp(fullImageFilepath)
     .resize(width, height)
     .toBuffer();
 
   fs.writeFile(thumbImageFilepath, imageBuffer, (err) => {
-    if (err) console.log(err)
-    next();
+    if (err) {
+      return res.send(err);
+    }
+    return next();
   });
 }
 
