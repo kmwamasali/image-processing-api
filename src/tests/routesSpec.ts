@@ -1,11 +1,10 @@
 import supertest from 'supertest';
 import app from '../index';
 
-const request = supertest(app);
-describe('Test images endpoint response', () => {
-  it('gets the api endpoint', async () => {
-    const response = await request.get('/api/images');
-
+describe('Test images endpoint response', async () => {
+  const request = supertest(app);
+  const response = await request.get('/api?filename=santamonica&width=200&height=200');
+  it('gets the api endpoint', () => {
     expect(response.status).toBe(200);
   });
 });
