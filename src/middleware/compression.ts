@@ -3,6 +3,13 @@ import express from 'express';
 import path from 'path';
 import sharp from 'sharp';
 
+/*
+* @description Compresses an image in folder file from url endpoint request object
+* @callback next
+* @param {Object} request
+* @param {Object} response
+* returns the callback function to move on to the next step of the endpoint request
+*/
 const compressImageFile = async (req: any, res: express.Response, next: express.NextFunction) => {
   const { filename } = req.query;
   const width = parseInt(req.query.width, 10);
