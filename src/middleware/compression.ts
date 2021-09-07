@@ -2,6 +2,7 @@ import fs from 'fs';
 import express from 'express';
 import path from 'path';
 import sharp from 'sharp';
+import logInput from '../util/logger';
 
 /*
 * @description Compresses an image in folder file from url endpoint request object
@@ -20,6 +21,7 @@ const compressImageFile = async (req: any, res: express.Response, next: express.
 
   try {
     fs.accessSync(thumbImageFilepath, fs.constants.F_OK);
+    logInput(`IMAGE from file cahce at ${thumbImageFilepath}`);
     next();
   } catch(err) {
     const imageBuffer = await sharp(fullImageFilepath)
@@ -30,6 +32,7 @@ const compressImageFile = async (req: any, res: express.Response, next: express.
       if (error) {
         res.end(error);
       }
+      logInput(`CREATED image at ${thumbImageFilepath}`)
       next();
     });
   }

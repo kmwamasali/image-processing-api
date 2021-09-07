@@ -5,6 +5,9 @@ Udacity fullstack javacript nano degree image processing api project
 ### Description
 
 An image processing api that resizes and saves images to user specification when visiting a url
+- Images are loaded from source file in code
+- Thumbnail filename includes the image size to allow for multiple sizes of the same image
+- logging to record when images are processed or accessed
 
 ### Technologies
 
