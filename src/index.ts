@@ -10,7 +10,7 @@ app.use(morgan('tiny'));
 app.use('/api', router);
 
 app.get('/', (req, res) => {
-  res.send('Hello image processing api');
+  res.sendStatus(200);
 });
 
 app.listen(port, () => {
