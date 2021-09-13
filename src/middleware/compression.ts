@@ -26,8 +26,8 @@ const compressImageFile = async (req: Request, res: express.Response, next: expr
   const width = parseInt(req.query.width, 10);
   const height = parseInt(req.query.height, 10);
 
-  const fullImageFilepath = path.join(__dirname, '../images/full', `${filename}.jpg`);
-  const thumbImageFilepath = path.join(__dirname, '../images/thumb', `${filename}-${width}-${height}.jpg`);
+  const fullImageFilepath = path.join(__dirname, '../../images/full', `${filename}.jpg`);
+  const thumbImageFilepath = path.join(__dirname, '../../images/thumb', `${filename}-${width}-${height}.jpg`);
 
   try {
     fs.accessSync(thumbImageFilepath, fs.constants.F_OK);

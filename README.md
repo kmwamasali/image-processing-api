@@ -26,3 +26,7 @@ An image processing api that resizes and saves images to user specification when
 
 3. Start the server using
    `npm run start`
+
+4. Available Endpoints
+   `\` returns status of 200
+   `\api\images?filename=fjord&width=200&height=200` returns the resized image from filename and size params
