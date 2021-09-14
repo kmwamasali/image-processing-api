@@ -1,3 +1,4 @@
+import path from 'path';
 import sharp from 'sharp';
 
 /*
@@ -8,12 +9,13 @@ import sharp from 'sharp';
 * @param {number} height
 * returns the callback function to move on to the next step of the endpoint request
 */
-const resizeImage = async (imagePath: string, width: number, height: number) => {
-  const imageBuffer = await sharp(imagePath)
-      .resize(width, height)
-      .toBuffer();
+const resizeImage = async (filename: string, width: number, height: number) => {
+  const fullImageFilepath = path.join(__dirname, '../../images/full', `${filename}.jpg`);
+  const thumbImageFilepath = path.join(__dirname, '../../images/thumb', `${filename}-${width}-${height}.jpg`);
 
-  return imageBuffer;
+  await sharp(fullImageFilepath)
+      .resize(width, height)
+      .toFile(thumbImageFilepath);
 }
 
 export default resizeImage;

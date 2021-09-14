@@ -1,8 +1,8 @@
-import fs from 'fs';
 import express from 'express';
 import path from 'path';
 import logInput from '../util/logger';
 import resizeImage from '../util/resizer';
+import fileExists from '../util/fileExists';
 
 /*
 * @description Compresses an image in folder file from url endpoint request object
@@ -29,34 +29,27 @@ const compressImageFile = async (req: Request, res: express.Response, next: expr
   const fullImageFilepath = path.join(__dirname, '../../images/full', `${filename}.jpg`);
   const thumbImageFilepath = path.join(__dirname, '../../images/thumb', `${filename}-${width}-${height}.jpg`);
 
-  try {
-    fs.accessSync(fullImageFilepath, fs.constants.F_OK);
-  } catch(err) {
+  const fullImageExists = fileExists(fullImageFilepath);
+  const thumbImageExists = fileExists(thumbImageFilepath);
+
+  if (fullImageExists === false) {
     let message = `Image with file name: ${filename} does not exist. `;
 
     if (!width || !height) {
       message += `Invalid input parameters, height: ${height}, width: ${width}`;
     }
 
-    logInput(err);
-    res.statusCode = 404;
-    res.end(message);
+    res.statusCode = 400;
+    return res.end(message);
   }
 
-  try {
-    fs.accessSync(thumbImageFilepath, fs.constants.F_OK);
+  if (thumbImageExists === true) {
     logInput(`IMAGE from file cache at ${thumbImageFilepath}`);
     next();
-  } catch(err) {
-    const imageBuffer = await resizeImage(fullImageFilepath, width, height);
-
-    fs.writeFile(thumbImageFilepath, imageBuffer, (error) => {
-      if (error) {
-        res.end(error);
-      }
-      logInput(`CREATED image at ${thumbImageFilepath}`);
-      next();
-    });
+  } else {
+    await resizeImage(filename, width, height);
+    logInput(`CREATED image at ${thumbImageFilepath}`);
+    next();
   }
 }
 
