@@ -29,9 +29,18 @@ const compressImageFile = async (req: Request, res: express.Response, next: expr
   const fullImageFilepath = path.join(__dirname, '../../images/full', `${filename}.jpg`);
   const thumbImageFilepath = path.join(__dirname, '../../images/thumb', `${filename}-${width}-${height}.jpg`);
 
-  if (!width || !height) {
+  try {
+    fs.accessSync(fullImageFilepath, fs.constants.F_OK);
+  } catch(err) {
+    let message = `Image with file name: ${filename} does not exist. `;
+
+    if (!width || !height) {
+      message += `Invalid input parameters, height: ${height}, width: ${width}`;
+    }
+
+    logInput(err);
     res.statusCode = 404;
-    res.end(`Invalid input parameters, height: ${height}, width: ${width}`);
+    res.end(message);
   }
 
   try {
@@ -45,7 +54,7 @@ const compressImageFile = async (req: Request, res: express.Response, next: expr
       if (error) {
         res.end(error);
       }
-      logInput(`CREATED image at ${thumbImageFilepath}`)
+      logInput(`CREATED image at ${thumbImageFilepath}`);
       next();
     });
   }

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon src/index.ts",
     "build": "npx tsc",
-    "lint:fix": "eslint 'src/**' --fix",
+    "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix",
     "format": "prettier-eslint 'src/**/*.ts'",
     "jasmine": "jasmine",
     "test": "npm run format && npm run build && npm run jasmine"
