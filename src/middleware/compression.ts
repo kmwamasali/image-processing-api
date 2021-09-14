@@ -29,6 +29,11 @@ const compressImageFile = async (req: Request, res: express.Response, next: expr
   const fullImageFilepath = path.join(__dirname, '../../images/full', `${filename}.jpg`);
   const thumbImageFilepath = path.join(__dirname, '../../images/thumb', `${filename}-${width}-${height}.jpg`);
 
+  if (!width || !height) {
+    res.statusCode = 404;
+    res.end(`Invalid input parameters, height: ${height}, width: ${width}`);
+  }
+
   try {
     fs.accessSync(thumbImageFilepath, fs.constants.F_OK);
     logInput(`IMAGE from file cache at ${thumbImageFilepath}`);

@@ -1,6 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 import router from './routes/routes';
+import logInput from './util/logger';
 
 const port = 8000;
 const app = express();
@@ -14,7 +15,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`App listening on port: ${port}`);
+  logInput(`App listening on port: ${port}`);
 });
 
 export default app;

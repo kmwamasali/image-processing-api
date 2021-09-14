@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /*
 * @description logs a message recieved in input to the console
 * @param {string} message
